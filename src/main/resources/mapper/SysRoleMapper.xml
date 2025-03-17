@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SysRoleDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SysRole">
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="RIGHTS" jdbcType="VARCHAR" property="rights" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="ADD_QX" jdbcType="VARCHAR" property="addQx" />
+    <result column="DEL_QX" jdbcType="VARCHAR" property="delQx" />
+    <result column="EDIT_QX" jdbcType="VARCHAR" property="editQx" />
+    <result column="CHA_QX" jdbcType="VARCHAR" property="chaQx" />
+    <result column="QX_ID" jdbcType="VARCHAR" property="qxId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_ID, ROLE_NAME, RIGHTS, PARENT_ID, ADD_QX, DEL_QX, EDIT_QX, CHA_QX, QX_ID
+  </sql>
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sys_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="save" parameterType="com.fit.entity.SysRole">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="rights != null">
+        RIGHTS,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="addQx != null">
+        ADD_QX,
+      </if>
+      <if test="delQx != null">
+        DEL_QX,
+      </if>
+      <if test="editQx != null">
+        EDIT_QX,
+      </if>
+      <if test="chaQx != null">
+        CHA_QX,
+      </if>
+      <if test="qxId != null">
+        QX_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="rights != null">
+        #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="addQx != null">
+        #{addQx,jdbcType=VARCHAR},
+      </if>
+      <if test="delQx != null">
+        #{delQx,jdbcType=VARCHAR},
+      </if>
+      <if test="editQx != null">
+        #{editQx,jdbcType=VARCHAR},
+      </if>
+      <if test="chaQx != null">
+        #{chaQx,jdbcType=VARCHAR},
+      </if>
+      <if test="qxId != null">
+        #{qxId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SysRole">
+    update sys_role
+    <set>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="rights != null">
+        RIGHTS = #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="addQx != null">
+        ADD_QX = #{addQx,jdbcType=VARCHAR},
+      </if>
+      <if test="delQx != null">
+        DEL_QX = #{delQx,jdbcType=VARCHAR},
+      </if>
+      <if test="editQx != null">
+        EDIT_QX = #{editQx,jdbcType=VARCHAR},
+      </if>
+      <if test="chaQx != null">
+        CHA_QX = #{chaQx,jdbcType=VARCHAR},
+      </if>
+      <if test="qxId != null">
+        QX_ID = #{qxId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="roleId != null and roleId != ''">
+         and ROLE_ID = #{roleId,jdbcType=VARCHAR}
+      </if>
+      <if test="roleName != null and roleName != ''">
+         and ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+      </if>
+      <if test="rights != null and rights != ''">
+         and RIGHTS = #{rights,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null and parentId != ''">
+         and PARENT_ID = #{parentId,jdbcType=VARCHAR}
+      </if>
+      <if test="addQx != null and addQx != ''">
+         and ADD_QX = #{addQx,jdbcType=VARCHAR}
+      </if>
+      <if test="delQx != null and delQx != ''">
+         and DEL_QX = #{delQx,jdbcType=VARCHAR}
+      </if>
+      <if test="editQx != null and editQx != ''">
+         and EDIT_QX = #{editQx,jdbcType=VARCHAR}
+      </if>
+      <if test="chaQx != null and chaQx != ''">
+         and CHA_QX = #{chaQx,jdbcType=VARCHAR}
+      </if>
+      <if test="qxId != null and qxId != ''">
+         and QX_ID = #{qxId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SysRole" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_role
+    <include refid="Base_Where_List" />
+    order by ROLE_ID desc 
+    <if test="pageNumber != null and pageSize != null">
+     limit ${pageNumber}, ${pageSize}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from sys_role
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_role
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from sys_role
+     where ROLE_ID in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+  <update id="deleteTable">
+    truncate table sys_role
+  </update>
+  <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+</mapper>

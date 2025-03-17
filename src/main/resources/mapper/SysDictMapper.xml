@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SysDictDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SysDict">
+    <id column="ZD_ID" jdbcType="VARCHAR" property="zdId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="SORT" jdbcType="INTEGER" property="sort" />
+    <result column="JB" jdbcType="INTEGER" property="jb" />
+    <result column="P_ID" jdbcType="VARCHAR" property="pId" />
+    <result column="P_CODE" jdbcType="VARCHAR" property="pCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ZD_ID, `NAME`, CODE, SORT, JB, P_ID, P_CODE
+  </sql>
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where ZD_ID = #{zdId,jdbcType=VARCHAR}
+  </select>
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sys_dict
+    where ZD_ID = #{zdId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="save" parameterType="com.fit.entity.SysDict">
+    insert into sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zdId != null">
+        ZD_ID,
+      </if>
+      <if test="name != null">
+        `NAME`,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="jb != null">
+        JB,
+      </if>
+      <if test="pId != null">
+        P_ID,
+      </if>
+      <if test="pCode != null">
+        P_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zdId != null">
+        #{zdId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="jb != null">
+        #{jb,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="pCode != null">
+        #{pCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SysDict">
+    update sys_dict
+    <set>
+      <if test="name != null">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="jb != null">
+        JB = #{jb,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        P_ID = #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="pCode != null">
+        P_CODE = #{pCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ZD_ID = #{zdId,jdbcType=VARCHAR}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="zdId != null and zdId != ''">
+         and ZD_ID = #{zdId,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null and name != ''">
+         and `NAME` = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="code != null and code != ''">
+         and CODE = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="sort != null and sort != ''">
+         and SORT = #{sort,jdbcType=INTEGER}
+      </if>
+      <if test="jb != null and jb != ''">
+         and JB = #{jb,jdbcType=INTEGER}
+      </if>
+      <if test="pId != null and pId != ''">
+         and P_ID = #{pId,jdbcType=VARCHAR}
+      </if>
+      <if test="pCode != null and pCode != ''">
+         and P_CODE = #{pCode,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SysDict" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_dict
+    <include refid="Base_Where_List" />
+    order by ZD_ID desc 
+    <if test="pageNumber != null and pageSize != null">
+     limit ${pageNumber}, ${pageSize}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from sys_dict
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_dict
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from sys_dict
+     where ZD_ID in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+  <update id="deleteTable">
+    truncate table sys_dict
+  </update>
+  <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+</mapper>

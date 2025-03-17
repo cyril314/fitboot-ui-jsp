@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SysAppUserDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SysAppUser">
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="RIGHTS" jdbcType="VARCHAR" property="rights" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="LAST_LOGIN" jdbcType="VARCHAR" property="lastLogin" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="SFID" jdbcType="VARCHAR" property="sfid" />
+    <result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+    <result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+    <result column="YEARS" jdbcType="INTEGER" property="years" />
+    <result column="NUMBER" jdbcType="VARCHAR" property="number" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USERNAME, `PASSWORD`, `NAME`, RIGHTS, ROLE_ID, LAST_LOGIN, IP, `STATUS`, 
+    BZ, PHONE, SFID, START_TIME, END_TIME, `YEARS`, `NUMBER`, EMAIL
+  </sql>
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_app_user
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sys_app_user
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="save" parameterType="com.fit.entity.SysAppUser">
+    insert into sys_app_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        `PASSWORD`,
+      </if>
+      <if test="name != null">
+        `NAME`,
+      </if>
+      <if test="rights != null">
+        RIGHTS,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="lastLogin != null">
+        LAST_LOGIN,
+      </if>
+      <if test="ip != null">
+        IP,
+      </if>
+      <if test="status != null">
+        `STATUS`,
+      </if>
+      <if test="bz != null">
+        BZ,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="sfid != null">
+        SFID,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="years != null">
+        `YEARS`,
+      </if>
+      <if test="number != null">
+        `NUMBER`,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rights != null">
+        #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null">
+        #{lastLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sfid != null">
+        #{sfid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="years != null">
+        #{years,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SysAppUser">
+    update sys_app_user
+    <set>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `PASSWORD` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rights != null">
+        RIGHTS = #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null">
+        LAST_LOGIN = #{lastLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `STATUS` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sfid != null">
+        SFID = #{sfid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="years != null">
+        `YEARS` = #{years,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        `NUMBER` = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="userId != null and userId != ''">
+         and USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="username != null and username != ''">
+         and USERNAME = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null and password != ''">
+         and `PASSWORD` = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null and name != ''">
+         and `NAME` = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="rights != null and rights != ''">
+         and RIGHTS = #{rights,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId != null and roleId != ''">
+         and ROLE_ID = #{roleId,jdbcType=VARCHAR}
+      </if>
+      <if test="lastLogin != null and lastLogin != ''">
+         and LAST_LOGIN = #{lastLogin,jdbcType=VARCHAR}
+      </if>
+      <if test="ip != null and ip != ''">
+         and IP = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''">
+         and `STATUS` = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="bz != null and bz != ''">
+         and BZ = #{bz,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null and phone != ''">
+         and PHONE = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="sfid != null and sfid != ''">
+         and SFID = #{sfid,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null and startTime != ''">
+         and START_TIME = #{startTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endTime != null and endTime != ''">
+         and END_TIME = #{endTime,jdbcType=VARCHAR}
+      </if>
+      <if test="years != null and years != ''">
+         and `YEARS` = #{years,jdbcType=INTEGER}
+      </if>
+      <if test="number != null and number != ''">
+         and `NUMBER` = #{number,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''">
+         and EMAIL = #{email,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SysAppUser" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_app_user
+    <include refid="Base_Where_List" />
+    order by USER_ID desc 
+    <if test="pageNumber != null and pageSize != null">
+     limit ${pageNumber}, ${pageSize}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from sys_app_user
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_app_user
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from sys_app_user
+     where USER_ID in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+  <update id="deleteTable">
+    truncate table sys_app_user
+  </update>
+  <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+</mapper>

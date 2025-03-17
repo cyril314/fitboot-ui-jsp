@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit.dao.SysUserQxDao">
+  <resultMap id="BaseResultMap" type="com.fit.entity.SysUserQx">
+    <id column="U_ID" jdbcType="VARCHAR" property="uId" />
+    <result column="C1" jdbcType="INTEGER" property="c1" />
+    <result column="C2" jdbcType="INTEGER" property="c2" />
+    <result column="C3" jdbcType="INTEGER" property="c3" />
+    <result column="C4" jdbcType="INTEGER" property="c4" />
+    <result column="Q1" jdbcType="INTEGER" property="q1" />
+    <result column="Q2" jdbcType="INTEGER" property="q2" />
+    <result column="Q3" jdbcType="INTEGER" property="q3" />
+    <result column="Q4" jdbcType="INTEGER" property="q4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    U_ID, C1, C2, C3, C4, Q1, Q2, Q3, Q4
+  </sql>
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_qx
+    where U_ID = #{uId,jdbcType=VARCHAR}
+  </select>
+  <delete id="delete" parameterType="java.lang.String">
+    delete from sys_user_qx
+    where U_ID = #{uId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="save" parameterType="com.fit.entity.SysUserQx">
+    insert into sys_user_qx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        U_ID,
+      </if>
+      <if test="c1 != null">
+        C1,
+      </if>
+      <if test="c2 != null">
+        C2,
+      </if>
+      <if test="c3 != null">
+        C3,
+      </if>
+      <if test="c4 != null">
+        C4,
+      </if>
+      <if test="q1 != null">
+        Q1,
+      </if>
+      <if test="q2 != null">
+        Q2,
+      </if>
+      <if test="q3 != null">
+        Q3,
+      </if>
+      <if test="q4 != null">
+        Q4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=VARCHAR},
+      </if>
+      <if test="c1 != null">
+        #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null">
+        #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null">
+        #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null">
+        #{c4,jdbcType=INTEGER},
+      </if>
+      <if test="q1 != null">
+        #{q1,jdbcType=INTEGER},
+      </if>
+      <if test="q2 != null">
+        #{q2,jdbcType=INTEGER},
+      </if>
+      <if test="q3 != null">
+        #{q3,jdbcType=INTEGER},
+      </if>
+      <if test="q4 != null">
+        #{q4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fit.entity.SysUserQx">
+    update sys_user_qx
+    <set>
+      <if test="c1 != null">
+        C1 = #{c1,jdbcType=INTEGER},
+      </if>
+      <if test="c2 != null">
+        C2 = #{c2,jdbcType=INTEGER},
+      </if>
+      <if test="c3 != null">
+        C3 = #{c3,jdbcType=INTEGER},
+      </if>
+      <if test="c4 != null">
+        C4 = #{c4,jdbcType=INTEGER},
+      </if>
+      <if test="q1 != null">
+        Q1 = #{q1,jdbcType=INTEGER},
+      </if>
+      <if test="q2 != null">
+        Q2 = #{q2,jdbcType=INTEGER},
+      </if>
+      <if test="q3 != null">
+        Q3 = #{q3,jdbcType=INTEGER},
+      </if>
+      <if test="q4 != null">
+        Q4 = #{q4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where U_ID = #{uId,jdbcType=VARCHAR}
+  </update>
+  <sql id="Base_Where_List">
+    <where>
+      <if test="uId != null and uId != ''">
+         and U_ID = #{uId,jdbcType=VARCHAR}
+      </if>
+      <if test="c1 != null and c1 != ''">
+         and C1 = #{c1,jdbcType=INTEGER}
+      </if>
+      <if test="c2 != null and c2 != ''">
+         and C2 = #{c2,jdbcType=INTEGER}
+      </if>
+      <if test="c3 != null and c3 != ''">
+         and C3 = #{c3,jdbcType=INTEGER}
+      </if>
+      <if test="c4 != null and c4 != ''">
+         and C4 = #{c4,jdbcType=INTEGER}
+      </if>
+      <if test="q1 != null and q1 != ''">
+         and Q1 = #{q1,jdbcType=INTEGER}
+      </if>
+      <if test="q2 != null and q2 != ''">
+         and Q2 = #{q2,jdbcType=INTEGER}
+      </if>
+      <if test="q3 != null and q3 != ''">
+         and Q3 = #{q3,jdbcType=INTEGER}
+      </if>
+      <if test="q4 != null and q4 != ''">
+         and Q4 = #{q4,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <select id="findList" parameterType="com.fit.entity.SysUserQx" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_user_qx
+    <include refid="Base_Where_List" />
+    order by U_ID desc 
+    <if test="pageNumber != null and pageSize != null">
+     limit ${pageNumber}, ${pageSize}
+	</if>
+  </select>
+  <select id="findCount" resultType="java.lang.Integer">
+    select count(1) from sys_user_qx
+    <include refid="Base_Where_List" />
+  </select>
+  <select id="get" parameterType="java.util.Map" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+     from sys_user_qx
+     <include refid="Base_Where_List" />
+  </select>
+  <delete id="batchDelete">
+    delete from sys_user_qx
+     where U_ID in (
+     <foreach collection="array" item="id" separator=",">
+     #{id}
+     </foreach>
+    )
+  </delete>
+  <update id="deleteTable">
+    truncate table sys_user_qx
+  </update>
+  <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    ${value}
+  </select>
+</mapper>
