@@ -12,7 +12,7 @@
     <artifactId>fitboot-ftl</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>uimysql</name>
-    <description>springboot-freemarker</description>
+    <description>springboot-jsp</description>
     <repositories>
         <repository>
             <id>aliyun-central</id>
